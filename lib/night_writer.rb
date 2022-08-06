@@ -2,18 +2,25 @@ class Nightwriter
   attr_reader :read_file, :write_file
 
   def initialize(read_file, write_file)
-    @read_file = ARGV[0]
-    @write_file = ARGV[1]
+    @read_file_x = ARGV[0]
+    @write_file_x = ARGV[1]
     ARGV == [ARGV[0], ARGV[1]]
   end
 
   def write_file_count
-    File.new(ARGV[1]).size
+    bean = File.new(ARGV[1])
+    bean.size
+  end
+
+  def read_file
+    handle = File.open(ARGV[0], "r")
+    incoming_text = handle.read
+    handle.close
   end
 
   def write_file
-    writer = File.open(ARGV[1], "w")
-    writer.write(read_file)
+    writer = File.open(ARGV[0], "w")
+    writer.write(ARGV)
     writer.close
   end
 end
