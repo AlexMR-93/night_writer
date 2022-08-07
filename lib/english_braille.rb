@@ -15,7 +15,7 @@ class EnglishBraille
 
   def file_encryptor
     handle = File.open(@orginal_message_file, "r")
-    incoming_text = handle.read.chomp
+    incoming_text = handle.read.delete("\n")
     handle.close
     translate(incoming_text)
   end
