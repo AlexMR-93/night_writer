@@ -1,23 +1,24 @@
 require "./lib/alphabet"
 
 class EnglishBraille
+  include Alphabet
   attr_reader :orginal_message_file, :encrypted_message
 
   def initialize(orginal_message_file, encrypted_message)
     @orginal_message_file = orginal_message_file
     @encrypted_message = encrypted_message
-    @translater_key = Alphabet.new.alphabet
+    @translater_key = alphabet
   end
 
   def orginal_message_file_count
     File.open(@orginal_message_file).size
   end
 
-  def file_encryptor
+  def file_reader
     handle = File.open(@orginal_message_file, "r")
     incoming_text = handle.read.delete("\n")
     handle.close
-    translate(incoming_text)
+    incoming_text
   end
 
   def translate(o_message)
@@ -35,9 +36,9 @@ class EnglishBraille
     [top.join, middle.join, bottom.join].join("\n")
   end
 
-  def e_file
+  def encrypted_file
     encrypted_file = File.open(@encrypted_message, "w")
-    encrypted_file.write(file_encryptor)
+    encrypted_file.write(translate(file_reader))
     encrypted_file.close
   end
 end
