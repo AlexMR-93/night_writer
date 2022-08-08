@@ -1,8 +1,6 @@
-class Alphabet
-  attr_reader :alphabet
-
-  def initialize
-    @alphabet = {
+module Alphabet
+  def alphabet
+    {
       "a" => "0.....",
       "b" => "0.0...",
       "c" => "00....",
