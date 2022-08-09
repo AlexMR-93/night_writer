@@ -1,3 +1,4 @@
+require "./spec/spec_helper"
 require "./lib/alphabet"
 require "./lib/english_braille"
 
@@ -15,7 +16,7 @@ RSpec.describe(EnglishBraille) do
     expect(@english_braille.file_reader).to(eq("alex"))
   end
 
-  it("translate") do
+  it(" can translate an english word to braille") do
     expect(@english_braille.translate("alex")).to(eq("0.0.0.00\n..0..0..\n..0...00"))
   end
 end
