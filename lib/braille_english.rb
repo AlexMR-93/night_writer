@@ -23,32 +23,23 @@ class BrailleEnglish
   end
 
   def translate(encrypted_message)
-    x = encrypted_message.split("\n")
+    e_message = encrypted_message.split("\n")
 
-    #x.map do |g|
-    #  g.chars.each_slice(2) do |a|
-      #  require "pry"
-      #  binding.pry
-      #end
-    #end
-    a = x.map do |g|
+    e_message_format = e_message.map do |g|
       g.chars.each_slice(2).map(&:join)
     end
 
-    top = a[0]
-    middle = a[1]
-    bottom = a[2]
+    top = e_message_format[0]
+    middle = e_message_format[1]
+    bottom = e_message_format[2]
     translated = []
 
     top.each_with_index do |val, index|
-      br = [val, middle[index], bottom[index]].join
-      translated << @non_braille[br]
+      braille_sting = [top[index], middle[index], bottom[index]].join
+      translated << @non_braille[braille_sting]
     end
 
-    require "pry"
-
-    binding.pry
-    all_in_line = [top, middle, bottom].join
+    translated.join
   end
 
   def file_writer
