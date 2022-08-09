@@ -12,7 +12,7 @@ class BrailleEnglish
   end
 
   def encrypt_message_count
-    File.open(@encrypted_message).size
+    File.open(@final_message).size
   end
 
   def second_file_reader
