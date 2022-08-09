@@ -12,7 +12,7 @@ class BrailleEnglish
   end
 
   def encrypt_message_count
-    File.open(@final_message).size
+    File.open(@encrypted_message).size
   end
 
   def second_file_reader
@@ -35,8 +35,8 @@ class BrailleEnglish
     translated = []
 
     top.each_with_index do |val, index|
-      braille_sting = [top[index], middle[index], bottom[index]].join
-      translated << @non_braille[braille_sting]
+      braille_string = [top[index], middle[index], bottom[index]].join
+      translated << @non_braille[braille_string]
     end
 
     translated.join
@@ -44,7 +44,11 @@ class BrailleEnglish
 
   def file_writer
     handle = File.new(@final_message, "w")
-    handle.write(translate(second_file_reader))
-    handle.close
+    chars = handle.write(translate(second_file_reader))
+
+    if chars > 0
+      handle.close
+      return true
+    end
   end
 end
