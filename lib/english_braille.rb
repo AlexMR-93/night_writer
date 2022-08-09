@@ -38,7 +38,11 @@ class EnglishBraille
 
   def encrypted_file
     encrypted_file = File.open(@encrypted_message, "w")
-    encrypted_file.write(translate(file_reader))
-    encrypted_file.close
+    chars = encrypted_file.write(translate(file_reader))
+
+    if chars > 0
+      encrypted_file.close
+      return true
+    end
   end
 end
